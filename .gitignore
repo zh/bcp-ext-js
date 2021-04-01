@@ -1,0 +1,11 @@
+node_modules/*
+.nyc_output/*
+
+coverage/
+
+dist/*
+examples.local/
+.env
+config.js
+__tests__
+.eslintcache
