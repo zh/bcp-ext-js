@@ -9,14 +9,15 @@
   },
   "files": [
     "dist/",
-    "examples/"
+    "examples/",
+    "lib/"
   ],
   "unpkg": "dist/bcp-ext.min.js",
   "scripts": {
     "lint": "eslint lib/",
     "test": "npm run build && nyc mocha",
     "prebuild": "npm run lint",
-    "build": "browserify lib/index.js --standalone bcp-ext --debug -o dist/bcp-ext.js && uglifyjs dist/bcp-ext.js --compress --source-map content=inline -o dist/bcp-ext.min.js"
+    "build": "browserify lib/*.js --standalone bcp-ext --debug -o dist/bcp-ext.js && uglifyjs dist/bcp-ext.js --compress --source-map content=inline -o dist/bcp-ext.min.js"
   },
   "repository": {
     "type": "git",
