@@ -2,7 +2,7 @@ const sampleTx = 'bddb26bb00ef94a8a43361622dd3c4743386b9da01d702ed921fdf9bd4be48
 
 const BCPEXT = require('../lib')
 
-async function exampleGetBCP (txid) {
+async function exampleGetBCP(txid) {
   try {
     const bcpjs = new BCPEXT()
     const bcp = await bcpjs.API.getBCP(txid)
