@@ -6,6 +6,7 @@ with different classes, as:
  - `Parser` class - wrapper around `bcp.js`, adding some transaction parsing
      methods etc.
  - `API` class for access to SLPDB and BITDB for BCP or NFT tokens info
+ - `NFT` - getting information for NFT tokens with attached BCP
 
 ## Used libraries and services
 
@@ -58,7 +59,45 @@ npm test
 
 ```js
 const BCPEXT = require('bcp-ext-js')
-const bcp = new BCPEXT()
+const bcpjs = new BCPEXT()
+```
+
+### Get BCP from Transaction ID
+
+```js
+const txid = 'bddb26bb00ef94a8a43361622dd3c4743386b9da01d702ed921fdf9bd4be4860'
+const bcp = await bcpjs.API.getBCP(txid)
+console.log(`bcp: ${JSON.stringify(bcp, null, 2)}`)
+console.log(`type: ${bcpjs.Parser.typeStr(bcp)}`)
+console.log(`source: ${bcpjs.Parser.dataStr(bcp)}`)
+
+...
+type: audio
+source: QmZmqLskJmghru919cvU4qSy3L5vc1S2JdzsUXrM17ZqT9
+```
+
+### Get info for NFT token with attached BCP
+
+```js
+const tokenId = 'adb0fbd80404c5fcb5495e676fb16f71dc290554787f9baf5b87aa3831a3259b'
+const token = await bcpjs.NFT.getTokenInfo(tokenId)
+
+console.log(`token: ${JSON.stringify(token, null, 2)}`)
+
+...
+token: {
+  "id": "adb0fbd80404c5fcb5495e676fb16f71dc290554787f9baf5b87aa3831a3259b",
+  "type": 65,
+  "name": "Audio NFT",
+  "symbol": "BCP.AUDIO.RAIN",
+  ...
+  "bcp": {
+    "id": "bddb26bb00ef94a8a43361622dd3c4743386b9da01d702ed921fdf9bd4be4860",
+    "type": "audio",
+    "source": "QmZmqLskJmghru919cvU4qSy3L5vc1S2JdzsUXrM17ZqT9",
+    "ipfs": true
+  }
+...
 ```
 
 You can see more usage examples in the [examples directory](examples/).
